@@ -18,11 +18,11 @@ class SizeApp {
         "SizeApp\nWidth = $width --- Height = $height --- Padding = $padding");
   }
 
-  double getWidth(double ratio) {
+  static double getWidth(double ratio) {
     return width * (ratio ?? 1);
   }
 
-  double getHeight(double ratio) {
+  static double getHeight(double ratio) {
     return height * (ratio ?? 1);
   }
 }

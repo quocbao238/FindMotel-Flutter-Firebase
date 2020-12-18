@@ -1,6 +1,7 @@
 import 'package:FindHotel/configs/appcolor.dart';
 import 'package:FindHotel/configs/sizeapp.dart';
 import 'package:FindHotel/models/slider.dart';
+import 'package:FindHotel/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 
@@ -48,37 +49,40 @@ class _TutorialPageState extends State<TutorialPage> {
           ))
       .toList();
 
-  void onDonePress() {}
+  void onDonePress() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: ((context) => LoginPage())));
+  }
 
   Widget renderSkipBtn() {
     // You can change color text SKIP in here,
     // I use my custom color in appcolor
-    return Text('SKIP', style: TextStyle(color: AppColor.blue256));
+    return Text('SKIP', style: TextStyle(color: AppTheme.blue256));
   }
 
   Widget renderNextBtn() {
     // You can use Text "Next" or Icon...
     // return Text('NEXT', style: TextStyle(color: AppColor.blue256));
-    return Icon(Icons.navigate_next, color: AppColor.blue256, size: 35.0);
+    return Icon(Icons.navigate_next, color: AppTheme.blue256, size: 35.0);
   }
 
   Widget renderDoneBtn() {
-    return Icon(Icons.done, color: AppColor.blue256);
+    return Icon(Icons.done, color: AppTheme.blue256);
   }
 
   @override
   Widget build(BuildContext context) {
     SizeApp.getSizeApp(context);
     return Scaffold(
-      backgroundColor: AppColor.primaryColor,
+      backgroundColor: AppTheme.primaryColor,
       body: IntroSlider(
         // We use slides i create in models - slider.dart
         slides: SliderApp.slidelst,
-        backgroundColorAllSlides: AppColor.primaryColor,
+        backgroundColorAllSlides: AppTheme.primaryColor,
         listCustomTabs: this.renderListCustomTabs(),
         //SKIP
         renderSkipBtn: this.renderSkipBtn(),
-        colorSkipBtn: AppColor.backgroundColor,
+        colorSkipBtn: AppTheme.backgroundColor,
         highlightColorSkipBtn: Colors.black,
 
         // Next color is same..
@@ -88,14 +92,14 @@ class _TutorialPageState extends State<TutorialPage> {
         // Done button
         renderDoneBtn: this.renderDoneBtn(),
         onDonePress: this.onDonePress,
-        colorDoneBtn: AppColor.backgroundColor,
+        colorDoneBtn: AppTheme.backgroundColor,
         highlightColorDoneBtn: Colors.black,
 
         // Custom color indicator..
         // I use color dot ~ color grey and activedot is primaryColor
         // Oop... i think use color blue256
-        colorDot: AppColor.backgroundColor,
-        colorActiveDot: AppColor.blue256,
+        colorDot: AppTheme.backgroundColor,
+        colorActiveDot: AppTheme.blue256,
         sizeDot: 13.0,
       ),
     );

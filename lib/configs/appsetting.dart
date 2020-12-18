@@ -9,4 +9,6 @@ class AppSetting {
   static const slider2 = 'assets/imageIntro/introSlider2.png';
   static const slider3 = 'assets/imageIntro/introSlider3.png';
   static const slider4 = 'assets/imageIntro/introSlider4.png';
+  static const loginSvg = 'assets/images/loginSvg.svg';
+  static const registerSvg = 'assets/images/registerSvg.svg';
 }
