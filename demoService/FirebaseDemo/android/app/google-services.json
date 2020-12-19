@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1010697707354",
+    "project_id": "findmotel-cc4ed",
+    "storage_bucket": "findmotel-cc4ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010697707354:android:d4f3a7f928ccffe9ef5d63",
+        "android_client_info": {
+          "package_name": "com.example.FirebaseDemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1010697707354-gd08bqf5mqlq4o8kbi2st1qql0i5fnqe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.FirebaseDemo",
+            "certificate_hash": "f9a80647d7f4a27a61c245d3ff30b2e7b1d841f6"
+          }
+        },
+        {
+          "client_id": "1010697707354-8j1gm98fftdht1ffrk4436b66c487nnd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzuFMCG5j2haRzU7wa6GNoj9xGI3R2xgY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1010697707354-8j1gm98fftdht1ffrk4436b66c487nnd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
