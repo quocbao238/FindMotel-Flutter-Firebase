@@ -1,8 +1,15 @@
 import 'package:FindHotel/configs/appcolor.dart';
 import 'package:FindHotel/configs/appsetting.dart';
 import 'package:FindHotel/configs/sizeapp.dart';
+import 'package:FindHotel/pages/register/register_page.dart';
+import 'package:FindHotel/widget/custom_btn_widget.dart';
+import 'package:FindHotel/widget/custom_image_widget.dart';
+import 'package:FindHotel/widget/custom_text_form_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../configs/appsetting.dart';
+import '../../configs/sizeapp.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -16,77 +23,118 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    SizeApp.getSizeApp(context);
     return Scaffold(
       backgroundColor: AppTheme.backgroundColor,
-      body: Padding(
+      body: SingleChildScrollView(
+        child: Container(
+          height: SizeApp.getHeight(1),
+          child: Stack(
+            children: [
+              _clippath(),
+              _body(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _clippath() {
+    return ClipPath(
+      child: Container(
+        color: AppTheme.primaryColor,
+      ),
+      clipper: LoginClipPath(),
+    );
+  }
+
+  Widget _body() {
+    return Positioned.fill(
+      child: Padding(
         padding: EdgeInsets.all(SizeApp.padding),
         child: Column(
           children: [
-            topImage(),
-            textformfield(
-                title: "Email",
-                textEditingController: emailController,
-                keyboardType: TextInputType.emailAddress),
-            textformfield(
+            // topImage(),
+            MyImageSvgWidget(
+                height: SizeApp.getHeight(0.32), urlSvg: AppSetting.loginSvg),
+            SizedBox(height: SizeApp.getHeight(0.03)),
+            MyButtonSquareCenterTextWidget(
+                color: Colors.blue[900],urlIcon: AppSetting.googleImgIcon,
+                title: 'Login with Google',
+                onTap: () {}),
+            _txtOr(),
+            MyCustomTextFormFieldWithHeaderWidget(
+                title: "Email", textEditingController: emailController),
+            MyCustomTextFormFieldWithHeaderWidget(
                 title: "Password",
-                textEditingController: passwordController,
-                keyboardType: TextInputType.text),
+                isPassword: true,
+                textEditingController: passwordController),
+            MyButtonSquareCenterTextWidget(
+                color: Colors.red, title: 'Login', onTap: () {}),
+            _btnsignup(onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => RegisterPage()));
+            }),
           ],
         ),
       ),
     );
   }
 
-  Widget textformfield(
-      {String title,
-      TextEditingController textEditingController,
-      TextInputType keyboardType}) {
+  Widget _txtOr() {
     return Container(
-      // height: 82.0,
-      margin: EdgeInsets.only(top: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      margin: EdgeInsets.only(
+          top: 16.0, left: SizeApp.padding, right: SizeApp.padding),
+      child: Row(
         children: [
-          Text(title, style: AppTheme.styleDefaultText),
+          Expanded(child: Container(height: 1.0, color: Colors.black12)),
           Container(
-            margin: EdgeInsets.only(top: SizeApp.padding * 0.5),
-            child: TextFormField(
-              // obscureText: isShowPassword,
-              controller: textEditingController,
-              decoration: InputDecoration(
-                // suffixIcon: title == "Password"
-                //     ? IconButton(
-                //         icon: Icon(Icons.remove_red_eye),
-                //         onPressed: () {},
-                //       )
-                //     : null,
-                fillColor: Colors.white,
-                filled: true,
-                // contentPadding:
-                // EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppTheme.primaryColor),
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-              ),
-              keyboardType: keyboardType,
-              style: AppTheme.styleDefaultText,
-            ),
-          )
+            margin: EdgeInsets.symmetric(horizontal: SizeApp.padding),
+            child: Text('OR',
+                style: AppTheme.styleHeaderText
+                    .copyWith(fontWeight: FontWeight.normal)),
+          ),
+          Expanded(child: Container(height: 1.0, color: Colors.black12))
         ],
       ),
     );
   }
 
-  Widget topImage() => SafeArea(
+  Widget _btnsignup({Function onTap}) => InkWell(
         child: Container(
-            child: SvgPicture.asset(
-          AppSetting.loginSvg,
-          height: SizeApp.getHeight(0.3),
-        )),
+          margin: EdgeInsets.only(top: 16.0, bottom: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text("Don't have an account? ", style: AppTheme.styleDefaultText),
+              Text("Register now!!!",
+                  style: AppTheme.styleDefaultPrimaryColorText),
+            ],
+          ),
+        ),
+        onTap: () => onTap(),
       );
+}
+
+class LoginClipPath extends CustomClipper<Path> {
+  var radius = 10.0;
+  double heightNeed = 0.35;
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+    path.lineTo(0, size.height * heightNeed);
+    path.quadraticBezierTo(size.width * 0.05, size.height * (heightNeed + 0.05),
+        size.width * 0.3, size.height * (heightNeed + 0.05));
+    path.quadraticBezierTo(size.width * 0.3, size.height * (heightNeed + 0.05),
+        size.width * 0.8, size.height * (heightNeed + 0.05));
+    path.quadraticBezierTo(size.width * 0.95, size.height * (heightNeed + 0.05),
+        size.width, size.height * (heightNeed + 0.1));
+    path.lineTo(size.width, 0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }

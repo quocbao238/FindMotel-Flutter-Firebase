@@ -11,4 +11,7 @@ class AppSetting {
   static const slider4 = 'assets/imageIntro/introSlider4.png';
   static const loginSvg = 'assets/images/loginSvg.svg';
   static const registerSvg = 'assets/images/registerSvg.svg';
+
+  // Icon img
+  static const googleImgIcon = 'assets/icon/googleIcon.png';
 }

@@ -1,5 +1,5 @@
 import 'package:FindHotel/configs/appcolor.dart';
-import 'package:FindHotel/pages/tutorial/tutorial_page.dart';
+import 'package:FindHotel/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -9,7 +9,7 @@ void main() {
 
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: TutorialPage(),
+    home: LoginPage(),
   ));
 }
 
